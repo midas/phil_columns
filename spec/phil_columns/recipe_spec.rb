@@ -1,27 +1,41 @@
 require 'spec_helper'
 
-describe Recipe do
+describe PhilColumns::Recipe do
+
+  before :each do
+    touch_test_file File.join( temp_path, '01_01_2010.txt' )
+    create_recipe_file recipe_name
+  end
+
+  after :each do
+    remove_test_environment
+  end
+
+  let :instance do
+    described_class.new default_recipe_file_path
+  end
+
+  context '#initialize' do
+
+    let :recipe_name do
+      :move_files
+    end
+
+    it "should have the correct instuctions" do
+      instance.instructions.should == send( "#{recipe_name}_recipe_file_contents" )
+    end
+
+  end
 
   context '#move_files' do
 
-    before :each do
-      FileUtils.touch source_file
+    let :recipe_name do
+      :move_files
     end
 
-    after :each do
-      FileUtils.rm dest_file
-    end
-
-    let :source_file do
-      'fixtures/test_file.txt'
-    end
-
-    let :dest_file do
-      'fixtures/test_dir/test_file.txt'
-    end
-
-    it "should successfully move files" do
-      move_files
+    it "should successfully move the file" do
+      instance.should_receive :move_files
+      instance.execute!
     end
 
   end
