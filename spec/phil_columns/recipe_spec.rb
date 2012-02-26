@@ -25,6 +25,30 @@ describe PhilColumns::Recipe do
       instance.instructions.should == send( "#{recipe_name}_recipe_file_contents" )
     end
 
+    context 'when given no recipe file' do
+
+      let :instance do
+        described_class.new nil
+      end
+
+      it "should raise an error" do
+        expect { instance }.should raise_error( 'Please provide a recipe file path' )
+      end
+
+    end
+
+    context 'when given an non-esistent recipe file' do
+
+      let :instance do
+        described_class.new File.join( temp_path, 'non_existent_recipe.rb' )
+      end
+
+      it "should raise an error" do
+        expect { instance }.should raise_error( 'Recipe file does not exist' )
+      end
+
+    end
+
   end
 
   context '#move_files' do

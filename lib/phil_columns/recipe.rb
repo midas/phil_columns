@@ -6,6 +6,9 @@ module PhilColumns
                 :recipe_file_path
 
     def initialize( recipe_file_path, base_path=nil )
+      raise 'Please provide a recipe file path' if recipe_file_path.nil?
+      raise 'Recipe file does not exist' unless File.file?( recipe_file_path )
+
       @recipe_file_path     = recipe_file_path
       @overridden_base_path = base_path
       @instructions         = File.read( recipe_file_path )
