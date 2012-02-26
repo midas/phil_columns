@@ -40,7 +40,7 @@ describe PhilColumns::Command::MoveFiles do
         end
 
         it "should correctly resolve a list of files to move" do
-          instance.send( :files_to_move ).should == {
+          instance.send( :files_from_like ).should == {
             File.join( base_path, 'test_file_1.txt' ) => File.join( base_path, test_dir, 'test_file_1.txt' ),
             File.join( base_path, 'test_file_2.txt' ) => File.join( base_path, test_dir, 'test_file_2.txt' ),
             File.join( base_path, 'test_file_3.txt' ) => File.join( base_path, test_dir, 'test_file_3.txt' ),
@@ -70,7 +70,7 @@ describe PhilColumns::Command::MoveFiles do
         end
 
         it "should correctly resolve a list of files to move" do
-          instance.send( :files_to_move ).should == {
+          instance.send( :files_from_like ).should == {
             File.join( base_path, 'test_file_1.txt' )  => File.join( base_path, test_dir, 'test_file_1.txt' ),
             File.join( base_path, 'test_file_2.txt' )  => File.join( base_path, test_dir, 'test_file_2.txt' ),
             File.join( base_path, 'test_file_3.txt' )  => File.join( base_path, test_dir, 'test_file_3.txt' ),
@@ -96,7 +96,7 @@ describe PhilColumns::Command::MoveFiles do
       touch_test_file
       File.file?( default_test_file_path ).should be_true
 
-      instance.stub!( :files_to_move ).and_return files
+      instance.stub!( :files_from_like ).and_return files
     end
 
     let :files do

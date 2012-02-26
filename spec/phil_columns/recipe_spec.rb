@@ -57,7 +57,7 @@ describe PhilColumns::Recipe do
       :move_files
     end
 
-    it "should successfully move the file" do
+    it "should successfully execute the move files command" do
       instance.should_receive :move_files
       instance.execute!
     end
