@@ -1,3 +1,5 @@
+require 'fileutils'
+
 module PhilColumns
 
   autoload :Cli,     "#{File.dirname __FILE__}/phil_columns/cli"

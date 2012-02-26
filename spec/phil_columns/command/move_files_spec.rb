@@ -1,4 +1,5 @@
 require 'spec_helper'
+require File.expand_path( "#{File.dirname __FILE__}/files_like_matching_sharedspec" )
 
 describe PhilColumns::Command::MoveFiles do
 
@@ -21,6 +22,15 @@ describe PhilColumns::Command::MoveFiles do
     'test_dir'
   end
 
+  it "should include the PhilColumns::Command::BasePathedCommand module" do
+    described_class.should include( PhilColumns::Command::BasePathedCommand )
+  end
+
+  it "should be concerned with PhilColumns::Command::FilesLikeMatching" do
+    described_class.should include( PhilColumns::Command::FilesLikeMatching )
+  end
+  it_should_behave_like 'concerned with FilesLikeMatching'
+
   context "given like and to" do
 
     before :each do
@@ -40,7 +50,7 @@ describe PhilColumns::Command::MoveFiles do
         end
 
         it "should correctly resolve a list of files to move" do
-          instance.send( :files_from_like ).should == {
+          instance.send( :files_to_move ).should == {
             File.join( base_path, 'test_file_1.txt' ) => File.join( base_path, test_dir, 'test_file_1.txt' ),
             File.join( base_path, 'test_file_2.txt' ) => File.join( base_path, test_dir, 'test_file_2.txt' ),
             File.join( base_path, 'test_file_3.txt' ) => File.join( base_path, test_dir, 'test_file_3.txt' ),
@@ -57,7 +67,7 @@ describe PhilColumns::Command::MoveFiles do
 
     end
 
-    context "when like is a Regexp" do
+    context "when like is a directory glob pattern" do
 
       before :each do
         instance.send( :_like=, "*.txt" )
@@ -70,7 +80,7 @@ describe PhilColumns::Command::MoveFiles do
         end
 
         it "should correctly resolve a list of files to move" do
-          instance.send( :files_from_like ).should == {
+          instance.send( :files_to_move ).should == {
             File.join( base_path, 'test_file_1.txt' )  => File.join( base_path, test_dir, 'test_file_1.txt' ),
             File.join( base_path, 'test_file_2.txt' )  => File.join( base_path, test_dir, 'test_file_2.txt' ),
             File.join( base_path, 'test_file_3.txt' )  => File.join( base_path, test_dir, 'test_file_3.txt' ),
@@ -96,7 +106,7 @@ describe PhilColumns::Command::MoveFiles do
       touch_test_file
       File.file?( default_test_file_path ).should be_true
 
-      instance.stub!( :files_from_like ).and_return files
+      instance.stub!( :files_to_move ).and_return files
     end
 
     let :files do

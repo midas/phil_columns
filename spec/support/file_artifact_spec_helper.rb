@@ -74,6 +74,16 @@ end
   end
 end
 
+  def remove_files_recipe_file_contents
+    <<-END
+set_base_path '#{temp_path}'
+
+remove_files do
+  like /^\\d+_\\d+_\\d{4}.txt$/
+end
+    END
+  end
+
 RSpec.configure do |config|
 
   config.include FileArtifactSpecHelper

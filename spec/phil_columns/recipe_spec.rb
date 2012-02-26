@@ -64,4 +64,18 @@ describe PhilColumns::Recipe do
 
   end
 
+  context '#remove_files' do
+
+    let :recipe_name do
+      :remove_files
+    end
+
+    it "should successfully execute the remove files command" do
+      instance.should_receive :remove_files
+      instance.execute!
+    end
+
+  end
+
+
 end

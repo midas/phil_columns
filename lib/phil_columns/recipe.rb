@@ -22,14 +22,28 @@ module PhilColumns
       @base_path = path
     end
 
+    def execute!
+      self.instance_eval( instructions,
+                          recipe_file_path )
+    end
+
+    # --------------------------------------------
+    # Built in commands
+    # --------------------------------------------
+
+    # Move files from a source to a destination.  Currently supports relative destinations
+    # to base path.
+    #
     def move_files( &block )
       Command::MoveFiles.new( base_path,
                               &block ).execute!
     end
 
-    def execute!
-      self.instance_eval( instructions,
-                          recipe_file_path )
+    # Remove files matching a Regexp or directory glob pattern.
+    #
+    def remove_files( &block )
+      Command::RemoveFiles.new( base_path,
+                                &block ).execute!
     end
 
   end
