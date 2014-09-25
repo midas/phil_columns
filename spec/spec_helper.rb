@@ -1,10 +1,2 @@
-require 'bundler/setup'
+$LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require 'phil_columns'
-
-Dir[File.join(File.dirname(__FILE__), "support/**/*.rb")].each { |f| require f }
-
-RSpec.configure do |config|
-
-  config.mock_with :rspec
-
-end

@@ -1,39 +1,67 @@
-require 'rubygems'
-require 'mixlib/cli'
+require 'thor'
 
 module PhilColumns
+  class Cli < Thor
 
-  class Cli
+    autoload :Generate, 'phil_columns/cli/generate'
 
-    include Mixlib::CLI
+    include Thor::Actions
 
-    option :base_path,
-      :short => "-p PATH",
-      :long => "--path PATH",
-      :description => "Override the base path set in the recipe"
+    desc 'generate TYPE', "Generates different phil_columns assets"
+    subcommand "generate", PhilColumns::Cli::Generate
 
-    option :help,
-      :short => "-h",
-      :long => "--help",
-      :description => "Show this message",
-      :on => :tail,
-      :boolean => true,
-      :show_options => true,
-      :exit => 0
-
-    def recipe_path
-      ARGV.first
+    desc "install PATH", "Install phil_columns within a project"
+    option :rails, type: :boolean, aliases: '-r', desc: "When true, install with defaults for Rails"
+    option :seeds_path, type: :string, aliases: '-p', desc: "The path of the project to install within", default: './seeds'
+    def install( path='.' )
+      execute PhilColumns::Command::Install, path: path
     end
 
-    def run!
-      parse_options
-      PhilColumns::Recipe.new( recipe_path,
-                               config[:base_path] ).execute!
+    desc "seed [TAGS]", "Run the seeds"
+    option :down, type: :boolean, aliases: '-d', desc: "When true, executes down seeding"
+    option :dry_run, type: :boolean, desc: "When true, output steps but does not execute protected blocks"
+    option :env, type: :string, aliases: '-e', desc: "The environemnt to execute in", default: 'development'
+    option :operation, type: :string, aliases: '-o', desc: "The operation: all or any", default: 'any'
+    option :version, type: :string, aliases: '-v', desc: "The version to execute to", default: 'all'
+    def seed( *tags )
+      execute PhilColumns::Command::Seed, tags: tags
+    end
+
+    no_commands do
+
+      def execute( klass, additional_options={} )
+        klass.new( options.merge( additional_options )).execute
+      rescue PhilColumns::Error => e
+        handle_error( e )
+        exit 1
+      end
+
+      def handle_error( e )
+        say "Error: #{e.message}", :red
+      end
+
+    end
+
+    def self.handle_argument_error( command, error, _, __ )
+      method = "handle_argument_error_for_#{command.name}"
+
+      if respond_to?( method )
+        send( method, command, error )
+      else
+        handle_argument_error_default( command, error )
+      end
+    end
+
+    def self.handle_argument_error_default( command, error )
+      $stdout.puts "Incorrect usage of command: #{command.name}"
+      $stdout.puts "  #{error.message}", ''
+      $stdout.puts "For correct usage:"
+      $stdout.puts "  phil_columns help #{command.name}"
+    end
+
+    def self.handle_no_command_error( name )
+      $stdout.puts "Unrecognized command: #{name}"
     end
 
   end
-
 end
-
-cli = PhilColumns::Cli.new
-cli.run!

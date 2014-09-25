@@ -1,10 +1,11 @@
 module PhilColumns
   module Command
 
-    autoload :BasePathedCommand, "#{File.dirname __FILE__}/command/base_pathed_command"
-    autoload :FilesLikeMatching, "#{File.dirname __FILE__}/command/files_like_matching"
-    autoload :RemoveFiles,       "#{File.dirname __FILE__}/command/remove_files"
-    autoload :MoveFiles,         "#{File.dirname __FILE__}/command/move_files"
+    autoload :Base,      'phil_columns/command/base'
+    autoload :Generate,  'phil_columns/command/generate'
+    autoload :Generator, 'phil_columns/command/generator'
+    autoload :Install,   'phil_columns/command/install'
+    autoload :Seed,      'phil_columns/command/seed'
 
   end
 end
