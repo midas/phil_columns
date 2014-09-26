@@ -13,10 +13,13 @@ module PhilColumns
   autoload :Error,         'phil_columns/error'
   autoload :Filter,        'phil_columns/filter'
   autoload :Migrator,      'phil_columns/migrator'
+  autoload :Output,        'phil_columns/output'
   autoload :Seed,          'phil_columns/seed'
+  autoload :Seeder,        'phil_columns/seeder'
 
   class << self
     attr_accessor :archivist_klass
+    attr_accessor :migrator_klass
   end
 
 end

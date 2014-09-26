@@ -7,6 +7,18 @@ module PhilColumns
 
     include Thor::Actions
 
+    def self.dry_run_option
+      option :dry_run, type: :boolean, desc: "When true, output steps but does not execute protected blocks"
+    end
+
+    def self.env_option
+      option :env, type: :string, aliases: '-e', desc: "The environemnt to execute in", default: 'development'
+    end
+
+    def self.operation_option
+      option :operation, type: :string, aliases: '-o', desc: "The operation: all or any", default: 'any'
+    end
+
     desc 'generate TYPE', "Generates different phil_columns assets"
     subcommand "generate", PhilColumns::Cli::Generate
 
@@ -19,12 +31,19 @@ module PhilColumns
 
     desc "seed [TAGS]", "Run the seeds"
     option :down, type: :boolean, aliases: '-d', desc: "When true, executes down seeding"
-    option :dry_run, type: :boolean, desc: "When true, output steps but does not execute protected blocks"
-    option :env, type: :string, aliases: '-e', desc: "The environemnt to execute in", default: 'development'
-    option :operation, type: :string, aliases: '-o', desc: "The operation: all or any", default: 'any'
+    dry_run_option
+    env_option
+    operation_option
     option :version, type: :string, aliases: '-v', desc: "The version to execute to", default: 'all'
     def seed( *tags )
       execute PhilColumns::Command::Seed, tags: tags
+    end
+
+    desc "mulligan [TAGS]", "Drop all tables, migrate up and run the seeds"
+    env_option
+    operation_option
+    def mulligan( *tags )
+      execute PhilColumns::Command::Mulligan, tags: tags
     end
 
     no_commands do

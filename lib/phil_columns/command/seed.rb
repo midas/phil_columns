@@ -52,10 +52,6 @@ module PhilColumns
         end
       end
 
-      def tags
-        config.tags
-      end
-
       def method_name
         return :down if down?
         :up

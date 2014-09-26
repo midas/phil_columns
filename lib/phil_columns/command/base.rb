@@ -3,6 +3,7 @@ module PhilColumns
     class Base
 
       include Thor::Actions
+      include PhilColumns::Output
 
       def initialize( options )
         @options = options
@@ -26,22 +27,6 @@ module PhilColumns
 
       def base_path
         Pathname.new( Dir.pwd )
-      end
-
-      def write( msg, color=:white )
-        $stdout.write( Rainbow( msg ).color( color ))
-      end
-
-      def say( msg, color=:white )
-        $stdout.puts( Rainbow( msg ).color( color ))
-      end
-
-      def say_ok
-        say 'OK', :green
-      end
-
-      def say_error
-        say 'ERROR', :red
       end
 
     end
