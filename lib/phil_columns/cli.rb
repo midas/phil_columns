@@ -46,6 +46,12 @@ module PhilColumns
       execute PhilColumns::Command::Mulligan, tags: tags
     end
 
+    desc "empty", "Empty tables"
+    env_option
+    def empty( *tags )
+      execute PhilColumns::Command::Empty, tags: tags
+    end
+
     no_commands do
 
       def execute( klass, additional_options={} )

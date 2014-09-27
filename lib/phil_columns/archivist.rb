@@ -7,6 +7,11 @@ module PhilColumns
       @backend = PhilColumns::archivist_klass.new
     end
 
+    def clear_seeds
+      raise( *error ) unless backend_responds?( :clear_seeds )
+      backend.send :clear_seeds
+    end
+
     def record_seed( version )
       raise( *error ) unless backend_responds?( :record_seed )
       backend.send :record_seed, version

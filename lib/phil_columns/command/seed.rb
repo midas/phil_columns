@@ -30,28 +30,6 @@ module PhilColumns
         end
       end
 
-      def archivist
-        @archivist ||= PhilColumns::Archivist.new
-      end
-
-      def seeds
-        @seeds ||= filter.seeds
-      end
-
-      def filter
-        @filter ||= Filter.new( config )
-      end
-
-      def load_environment
-        return if env_files.nil? || env_files.empty?
-
-        say 'Loading environment ...'
-
-        env_files.each do |file|
-          require file.expand_path
-        end
-      end
-
       def method_name
         return :down if down?
         :up
@@ -59,10 +37,6 @@ module PhilColumns
 
       def down?
         config.down
-      end
-
-      def env_files
-        @env_files ||= config.env_files.map { |f| Pathname.new f }
       end
 
     end

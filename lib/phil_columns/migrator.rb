@@ -29,6 +29,11 @@ module PhilColumns
       end
     end
 
+    def tables
+      raise( *error ) unless backend_responds?( :tables )
+      backend.send :tables
+    end
+
     def up( version=nil )
       raise( *error ) unless backend_responds?( :up )
       backend.send :up, version

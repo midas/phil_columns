@@ -17,6 +17,22 @@ module PhilColumns
 
       attr_reader :options
 
+      def archivist
+        @archivist ||= PhilColumns::Archivist.new
+      end
+
+      def migrator
+        @migrator ||= PhilColumns::Migrator.new
+      end
+
+      def seeder
+        @seeder ||= PhilColumns::Seeder.new( config )
+      end
+
+      def dry_run?
+        config.dry_run
+      end
+
       def config
         @config = Configuration.new( options )
       end
@@ -27,6 +43,20 @@ module PhilColumns
 
       def base_path
         Pathname.new( Dir.pwd )
+      end
+
+      def load_environment
+        return if env_files.nil? || env_files.empty?
+
+        say 'Loading environment ...'
+
+        env_files.each do |file|
+          require file.expand_path
+        end
+      end
+
+      def env_files
+        @env_files ||= config.env_files.map { |f| Pathname.new f }
       end
 
     end
