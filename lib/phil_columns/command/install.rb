@@ -34,8 +34,10 @@ module PhilColumns
       def config_defaults
         defaults = rails? ? rails_default_settings : {}
         defaults.merge(
+          default_tags: [
+            'default'
+          ],
           seeds_path: seeds_path.to_s,
-          default_tags: []
         )
       end
 
