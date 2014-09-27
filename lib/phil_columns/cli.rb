@@ -4,6 +4,7 @@ module PhilColumns
   class Cli < Thor
 
     autoload :Generate, 'phil_columns/cli/generate'
+    autoload :List,     'phil_columns/cli/list'
 
     include Thor::Actions
 
@@ -28,6 +29,9 @@ module PhilColumns
     def install( path='.' )
       execute PhilColumns::Command::Install, path: path
     end
+
+    desc 'list SUBCOMMAND', "List different phil_columns info"
+    subcommand "list", PhilColumns::Cli::List
 
     desc "seed [TAGS]", "Run the seeds"
     option :down, type: :boolean, aliases: '-d', desc: "When true, executes down seeding"

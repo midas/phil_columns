@@ -37,9 +37,10 @@ module PhilColumns
       Pathname.new( '.phil_columns' )
     end
 
-    # Not sure why we need this explicit proxies for the boolean args
-    def down;    _config.down;    end
-    def dry_run; _config.dry_run; end
+    # Not sure why we need these explicit proxies
+    def down;      _config.down;      end
+    def dry_run;   _config.dry_run;   end
+    def operation; _config.operation; end
 
     def version
       if _config.down &&

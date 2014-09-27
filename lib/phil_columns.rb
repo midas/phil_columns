@@ -15,6 +15,7 @@ module PhilColumns
   autoload :Migrator,      'phil_columns/migrator'
   autoload :Output,        'phil_columns/output'
   autoload :Seed,          'phil_columns/seed'
+  autoload :SeedUtils,     'phil_columns/seed_utils'
   autoload :Seeder,        'phil_columns/seeder'
   autoload :WithBackend,   'phil_columns/with_backend'
 
