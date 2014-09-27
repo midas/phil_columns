@@ -16,6 +16,7 @@ module PhilColumns
   autoload :Output,        'phil_columns/output'
   autoload :Seed,          'phil_columns/seed'
   autoload :Seeder,        'phil_columns/seeder'
+  autoload :WithBackend,   'phil_columns/with_backend'
 
   class << self
     attr_accessor :archivist_klass

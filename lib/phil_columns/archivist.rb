@@ -1,7 +1,7 @@
 module PhilColumns
   class Archivist
 
-    attr_reader :backend
+    include PhilColumns::WithBackend
 
     def initialize
       @backend = PhilColumns::archivist_klass.new
@@ -30,16 +30,6 @@ module PhilColumns
     def ensure_schema_seeds_table!
       raise( *error ) unless backend_responds?( :ensure_schema_seeds_table! )
       backend.send :ensure_schema_seeds_table!
-    end
-
-  protected
-
-    def backend_responds?( method )
-      backend && backend.respond_to?( method )
-    end
-
-    def error
-      [NotImplementedError, "You must include a database adapter (ie. phil_columns-activerecord)"]
     end
 
   end

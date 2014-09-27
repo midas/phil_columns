@@ -2,8 +2,7 @@ module PhilColumns
   class Migrator
 
     include PhilColumns::Output
-
-    attr_reader :backend
+    include PhilColumns::WithBackend
 
     def initialize
       @backend = PhilColumns::migrator_klass.new
