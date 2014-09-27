@@ -53,7 +53,6 @@ module PhilColumns
     end
 
     desc "empty", "Empty tables"
-    env_option
     def empty( *tags )
       execute PhilColumns::Command::Empty, tags: tags
     end
