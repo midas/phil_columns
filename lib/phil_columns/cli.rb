@@ -49,7 +49,7 @@ module PhilColumns
       execute PhilColumns::Command::Install, path: path
     end
 
-    desc 'list SUBCOMMAND', "List different phil_columns info"
+    desc 'list SUBCOMMAND', "List different seed info"
     subcommand "list", PhilColumns::Cli::List
 
     desc "mulligan [TAGS]", "Unload and load the schema then execute seeds"
