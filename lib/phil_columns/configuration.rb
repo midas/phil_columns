@@ -77,6 +77,8 @@ module PhilColumns
       %w(
         default_tags
         env_files
+        schema_load_strategy
+        schema_unload_strategy
         seeds_path
       )
     end

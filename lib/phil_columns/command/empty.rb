@@ -12,6 +12,7 @@ module PhilColumns
         end
 
         archivist.clear_seeds
+        migrator.clear_migrations_table
       end
 
     protected

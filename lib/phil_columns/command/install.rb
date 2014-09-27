@@ -37,6 +37,8 @@ module PhilColumns
           default_tags: [
             'default'
           ],
+          schema_load_strategy: 'load',
+          schema_unload_strategy: 'drop',
           seeds_path: seeds_path.to_s,
         )
       end

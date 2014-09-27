@@ -42,6 +42,8 @@ module PhilColumns
     desc "mulligan [TAGS]", "Drop all tables, migrate up and run the seeds"
     env_option
     operation_option
+    option :schema_load_strategy, type: :string, aliases: '-l', desc: "The schema load strategy to use: load or migrate"
+    option :schema_unload_strategy, type: :string, aliases: '-u', desc: "The schema unload strategy to use: drop or migrate"
     def mulligan( *tags )
       execute PhilColumns::Command::Mulligan, tags: tags
     end

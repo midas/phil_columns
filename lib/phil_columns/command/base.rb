@@ -22,7 +22,7 @@ module PhilColumns
       end
 
       def migrator
-        @migrator ||= PhilColumns::Migrator.new
+        @migrator ||= PhilColumns::Migrator.new( config )
       end
 
       def seeder
