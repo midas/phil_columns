@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = PhilColumns::VERSION
   spec.authors       = ["JC. ason Harrelson (midas)"]
   spec.email         = ["jason@lookforwardenterprises.com"]
-  spec.summary       = %q{A utility for seeding databases for test and production.}
-  spec.description   = %q{A utility for seeding databases for test and production.  See README for more details.}
+  spec.summary       = %q{A utility for seeding databases for development and production.}
+  spec.description   = %q{A utility for seeding databases for development and production.  See README for more details.}
   spec.homepage      = ""
   spec.license       = "MIT"
 
