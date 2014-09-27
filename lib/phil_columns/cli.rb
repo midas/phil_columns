@@ -12,7 +12,7 @@ module PhilColumns
     end
 
     def self.env_option
-      option :env, type: :string, aliases: '-e', desc: "The environemnt to execute in", default: 'development'
+      option :env, type: :string, aliases: '-e', desc: "The environment to execute in", default: 'development'
     end
 
     def self.operation_option
