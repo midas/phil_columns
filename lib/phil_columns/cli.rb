@@ -20,6 +20,14 @@ module PhilColumns
       option :operation, type: :string, aliases: '-o', desc: "The operation: all or any", default: 'any'
     end
 
+    desc "empty", "Empty tables"
+    long_desc <<-LONGDESC
+      Empties all tables excluding any project metadata tables, ie. schema_migrations when using ActiveRecord.
+    LONGDESC
+    def empty( *tags )
+      execute PhilColumns::Command::Empty, tags: tags
+    end
+
     desc 'generate SUBCOMMAND', "Generates different phil_columns assets"
     subcommand "generate", PhilColumns::Cli::Generate
 
@@ -43,31 +51,6 @@ module PhilColumns
 
     desc 'list SUBCOMMAND', "List different phil_columns info"
     subcommand "list", PhilColumns::Cli::List
-
-    desc "seed [TAGS]", "Execute the seeds"
-    long_desc <<-LONGDESC
-      Execute the seeds.
-
-      When --down[-d] option, execute the down seeds.
-
-      When --dry-run option, execute the seeds as a dry run.
-
-      When --env[-e] option, override the environment.  Default: development.
-
-      When --operation[-o] option, override the operation to one of any or all.  Default: any.
-
-      When --version[-v] option, override the version.  Default: all.  Provide the timestamp from the beginning of the seed file name
-      as the version parameter.  When seeding up, the specified version is included in the seed set.  When seeding down the specified
-      version is not included in the set.
-    LONGDESC
-    option :down, type: :boolean, aliases: '-d', desc: "When true, executes down seeding"
-    dry_run_option
-    env_option
-    operation_option
-    option :version, type: :string, aliases: '-v', desc: "The version to execute to", default: 'all'
-    def seed( *tags )
-      execute PhilColumns::Command::Seed, tags: tags
-    end
 
     desc "mulligan [TAGS]", "Unload and load the schema then execute seeds"
     long_desc <<-LONGDESC
@@ -95,12 +78,29 @@ module PhilColumns
       execute PhilColumns::Command::Mulligan, tags: tags
     end
 
-    desc "empty", "Empty tables"
+    desc "seed [TAGS]", "Execute the seeds"
     long_desc <<-LONGDESC
-      Empties all tables excluding any project metadata tables, ie. schema_migrations when using ActiveRecord.
+      Execute the seeds.
+
+      When --down[-d] option, execute the down seeds.
+
+      When --dry-run option, execute the seeds as a dry run.
+
+      When --env[-e] option, override the environment.  Default: development.
+
+      When --operation[-o] option, override the operation to one of any or all.  Default: any.
+
+      When --version[-v] option, override the version.  Default: all.  Provide the timestamp from the beginning of the seed file name
+      as the version parameter.  When seeding up, the specified version is included in the seed set.  When seeding down the specified
+      version is not included in the set.
     LONGDESC
-    def empty( *tags )
-      execute PhilColumns::Command::Empty, tags: tags
+    option :down, type: :boolean, aliases: '-d', desc: "When true, executes down seeding"
+    dry_run_option
+    env_option
+    operation_option
+    option :version, type: :string, aliases: '-v', desc: "The version to execute to", default: 'all'
+    def seed( *tags )
+      execute PhilColumns::Command::Seed, tags: tags
     end
 
     no_commands do
