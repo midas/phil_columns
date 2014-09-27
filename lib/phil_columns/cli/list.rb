@@ -4,6 +4,11 @@ module PhilColumns
   class Cli
     class List < Thor
 
+      def self.banner( command, namespace=nil, subcommand=false )
+        return "#{basename} list help [SUBCOMMAND]" if command.name == 'help'
+        "#{basename} #{command.usage}"
+      end
+
       def self.env_option
         option :env, type: :string, aliases: '-e', desc: "The environment to execute in", default: 'development'
       end
@@ -12,14 +17,14 @@ module PhilColumns
         option :operation, type: :string, aliases: '-o', desc: "The operation: all or any", default: 'any'
       end
 
-      desc "tagged-with TAGS", "List all seeds tagged with tag(s)"
+      desc "list tagged-with TAGS", "List all seeds tagged with tag(s)"
       env_option
       operation_option
       def tagged_with( *tags )
         PhilColumns::Command::List::TaggedWith.new( options.merge( tags: tags )).execute
       end
 
-      desc "tags", "List all tags from all seeds."
+      desc "list tags", "List all tags from all seeds."
       env_option
       def tags
         PhilColumns::Command::List::Tags.new( options ).execute

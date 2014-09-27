@@ -4,7 +4,12 @@ module PhilColumns
   class Cli
     class Generate < Thor
 
-      desc "seed NAME", "Generate a seed"
+      def self.banner( command, namespace=nil, subcommand=false )
+        return "#{basename} generate help [SUBCOMMAND]" if command.name == 'help'
+        "#{basename} #{command.usage}"
+      end
+
+      desc "generate seed NAME", "Generate a seed"
       def seed( name )
         PhilColumns::Command::Generate::Seed.new( options.merge( seed_name: name )).execute
       end
