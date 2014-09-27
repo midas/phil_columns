@@ -9,7 +9,10 @@ module PhilColumns
         "#{basename} #{command.usage}"
       end
 
-      desc "generate seed NAME", "Generate a seed"
+      desc "generate seed NAME", "Generate a seed class"
+      long_desc <<-LONGDESC
+        Generate a seed file with name NAME.
+      LONGDESC
       def seed( name )
         PhilColumns::Command::Generate::Seed.new( options.merge( seed_name: name )).execute
       end

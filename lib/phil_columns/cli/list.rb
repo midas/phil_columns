@@ -18,6 +18,13 @@ module PhilColumns
       end
 
       desc "list tagged-with TAGS", "List all seeds tagged with tag(s)"
+      long_desc <<-LONGDESC
+        List all seeds tagged with tag(s) within specified environment.
+
+        With --env[-e] option, the environment is overridden. Default: development.
+
+        With --operation[-o] option, the tag filtering operation is overridden. Default: any.
+      LONGDESC
       env_option
       operation_option
       def tagged_with( *tags )
@@ -25,6 +32,11 @@ module PhilColumns
       end
 
       desc "list tags", "List all tags from all seeds."
+      long_desc <<-LONGDESC
+        List all tags from all seeds within specified environment.
+
+        With --env[-e] option, the environment is overridden. Default: development.
+      LONGDESC
       env_option
       def tags
         PhilColumns::Command::List::Tags.new( options ).execute

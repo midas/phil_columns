@@ -24,6 +24,17 @@ module PhilColumns
     subcommand "generate", PhilColumns::Cli::Generate
 
     desc "install PATH", "Install phil_columns within a project"
+    long_desc <<-LONGDESC
+      Install phil_columns within a project at path PATH.
+
+      Installs a .phil_columns configuration file within PATH and a seeds directory at <PATH>/seeds by default.
+
+      When --rails[-r] option, install with defaults for a Rails project.  This includes the configuring the seeds directory
+      to db/seeds and adding config/enironment to the list of env_files in the configuration file.
+
+      When --seeds-path[-p] option, configure the seeds directory specified path.  This option is not necessary if --rails
+      option provided.
+    LONGDESC
     option :rails, type: :boolean, aliases: '-r', desc: "When true, install with defaults for Rails"
     option :seeds_path, type: :string, aliases: '-p', desc: "The path of the project to install within", default: './seeds'
     def install( path='.' )
@@ -33,7 +44,22 @@ module PhilColumns
     desc 'list SUBCOMMAND', "List different phil_columns info"
     subcommand "list", PhilColumns::Cli::List
 
-    desc "seed [TAGS]", "Run the seeds"
+    desc "seed [TAGS]", "Execute the seeds"
+    long_desc <<-LONGDESC
+      Execute the seeds.
+
+      When --down[-d] option, execute the down seeds.
+
+      When --dry-run option, execute the seeds as a dry run.
+
+      When --env[-e] option, override the environment.  Default: development.
+
+      When --operation[-o] option, override the operation to one of any or all.  Default: any.
+
+      When --version[-v] option, override the version.  Default: all.  Provide the timestamp from the beginning of the seed file name
+      as the version parameter.  When seeding up, the specified version is included in the seed set.  When seeding down the specified
+      version is not included in the set.
+    LONGDESC
     option :down, type: :boolean, aliases: '-d', desc: "When true, executes down seeding"
     dry_run_option
     env_option
@@ -43,7 +69,24 @@ module PhilColumns
       execute PhilColumns::Command::Seed, tags: tags
     end
 
-    desc "mulligan [TAGS]", "Drop all tables, migrate up and run the seeds"
+    desc "mulligan [TAGS]", "Unload and load the schema then execute seeds"
+    long_desc <<-LONGDESC
+      A complete reset of the database.  The tables are removed and rebuilt and the data is seeded.  The strategy used to
+      unload and load the schema is controlled by the configuration file attributes schema_unload\_strategy and schema\_load_strategy.  The mulligan
+      term is borrowed from golf where a mulligan is a do-over.
+
+      When --env[-e] option, override the environment.  Default: development.
+
+      When --operation[-o] option, override the operation to one of any or all.  Default: any.
+
+      When --schema-load-strategy[-l] option, override the schema load strategy to one of load or migrate.  When load is specified loads
+      the schema.  When migrate specified runs the migrations.  Load is a more efficient operation.  Defaults to the value specified in
+      the configuration file attribute schema_load_strategy.
+
+      When --schema-unload-strategy[-l] option, override the schema unload strategy to one of drop or migrate.  When drop is specified drops
+      the tables.  When migrate specified runs the migrations down.  Drop is a more efficient operation.  Defaults to the value specified in
+      the configuration file attribute schema_unload_strategy.
+    LONGDESC
     env_option
     operation_option
     option :schema_load_strategy, type: :string, aliases: '-l', desc: "The schema load strategy to use: load or migrate"
@@ -53,6 +96,9 @@ module PhilColumns
     end
 
     desc "empty", "Empty tables"
+    long_desc <<-LONGDESC
+      Empties all tables excluding any project metadata tables, ie. schema_migrations when using ActiveRecord.
+    LONGDESC
     def empty( *tags )
       execute PhilColumns::Command::Empty, tags: tags
     end
