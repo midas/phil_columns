@@ -19,7 +19,7 @@ module PhilColumns
       option :operation, type: :string, aliases: '-o', desc: "The operation: all or any", default: 'any'
     end
 
-    desc 'generate TYPE', "Generates different phil_columns assets"
+    desc 'generate SUBCOMMAND', "Generates different phil_columns assets"
     subcommand "generate", PhilColumns::Cli::Generate
 
     desc "install PATH", "Install phil_columns within a project"

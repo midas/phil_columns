@@ -4,7 +4,7 @@ module PhilColumns
   class Cli
     class Generate < Thor
 
-      desc "generate seed NAME", "Generate a seed"
+      desc "seed NAME", "Generate a seed"
       def seed( name )
         PhilColumns::Command::Generate::Seed.new( options.merge( seed_name: name )).execute
       end
