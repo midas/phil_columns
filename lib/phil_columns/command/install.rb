@@ -50,8 +50,6 @@ module PhilColumns
 
       def rails_default_settings
         {
-          'db_migrate_down_cmd' => "bundle exec rake db:migrate VERSION=0",
-          'db_migrate_up_cmd' => "bundle exec rake db:migrate",
           'env_files' => [
             'config/environment'
           ]

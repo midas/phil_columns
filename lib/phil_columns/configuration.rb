@@ -76,8 +76,6 @@ module PhilColumns
     def keys_to_persist
       %w(
         default_tags
-        db_migrate_down_cmd
-        db_migrate_up_cmd
         env_files
         seeds_path
       )
