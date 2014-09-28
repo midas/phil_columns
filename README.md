@@ -249,3 +249,9 @@ the environment file(s) from a framework, such as Rails.
 ##### seeds_path
 
 [String] The relative path to the seeds directory.
+
+
+## Adapters and Extensions
+
+* [phil_columns-activerecord](https://github.com/midas/phil_columns-activerecord)
+* [phil_columns-factory_girl](https://github.com/midas/phil_columns-factory_girl)
