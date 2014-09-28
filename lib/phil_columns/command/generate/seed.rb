@@ -16,7 +16,7 @@ module PhilColumns
       protected
 
         def template_filepath
-          'templates/seed_class.erb'
+          File.expand_path(  '../../../../../templates/seed_class.erb', __FILE__ )
         end
 
       end
