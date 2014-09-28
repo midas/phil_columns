@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["jason@lookforwardenterprises.com"]
   spec.summary       = %q{A utility for seeding databases for development and production.}
   spec.description   = %q{A utility for seeding databases for development and production.  See README for more details.}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/midas/phil_columns"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
