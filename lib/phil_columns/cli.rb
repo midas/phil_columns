@@ -16,8 +16,26 @@ module PhilColumns
       option :env, type: :string, aliases: '-e', desc: "The environment to execute in", default: 'development'
     end
 
+    def self.env_option_description
+      %(When --env[-e] option, override the environment.  Default: development.)
+    end
+
     def self.operation_option
       option :operation, type: :string, aliases: '-o', desc: "The operation: all or any", default: 'any'
+    end
+
+    def self.operation_option_description
+      %(When --operation[-o] option, override the operation to one of any or all.  Default: any.)
+    end
+
+    def self.version_option
+      option :version, type: :string, aliases: '-v', desc: "The version to execute to", default: 'all'
+    end
+
+    def self.version_option_description
+      %(When --version[-v] option, override the version.  Default: all.  Provide the timestamp from the beginning of the seed file name
+      as the version parameter.  When seeding up, the specified version is included in the seed set.  When seeding down the specified
+      version is not included in the set.)
     end
 
     desc "empty", "Empty tables"
@@ -58,9 +76,9 @@ module PhilColumns
       unload and load the schema is controlled by the configuration file attributes schema_unload\_strategy and schema\_load_strategy.  The mulligan
       term is borrowed from golf where a mulligan is a do-over.
 
-      When --env[-e] option, override the environment.  Default: development.
+      #{env_option_description}
 
-      When --operation[-o] option, override the operation to one of any or all.  Default: any.
+      #{operation_option_description}
 
       When --schema-load-strategy[-l] option, override the schema load strategy to one of load or migrate.  When load is specified loads
       the schema.  When migrate specified runs the migrations.  Load is a more efficient operation.  Defaults to the value specified in
@@ -69,11 +87,14 @@ module PhilColumns
       When --schema-unload-strategy[-l] option, override the schema unload strategy to one of drop or migrate.  When drop is specified drops
       the tables.  When migrate specified runs the migrations down.  Drop is a more efficient operation.  Defaults to the value specified in
       the configuration file attribute schema_unload_strategy.
+
+      #{version_option_description}
     LONGDESC
     env_option
     operation_option
     option :schema_load_strategy, type: :string, aliases: '-l', desc: "The schema load strategy to use: load or migrate"
     option :schema_unload_strategy, type: :string, aliases: '-u', desc: "The schema unload strategy to use: drop or migrate"
+    version_option
     def mulligan( *tags )
       execute PhilColumns::Command::Mulligan, tags: tags
     end
@@ -86,19 +107,17 @@ module PhilColumns
 
       When --dry-run option, execute the seeds as a dry run.
 
-      When --env[-e] option, override the environment.  Default: development.
+      #{env_option_description}
 
-      When --operation[-o] option, override the operation to one of any or all.  Default: any.
+      #{operation_option_description}
 
-      When --version[-v] option, override the version.  Default: all.  Provide the timestamp from the beginning of the seed file name
-      as the version parameter.  When seeding up, the specified version is included in the seed set.  When seeding down the specified
-      version is not included in the set.
+      #{version_option_description}
     LONGDESC
     option :down, type: :boolean, aliases: '-d', desc: "When true, executes down seeding"
     dry_run_option
     env_option
     operation_option
-    option :version, type: :string, aliases: '-v', desc: "The version to execute to", default: 'all'
+    version_option
     def seed( *tags )
       execute PhilColumns::Command::Seed, tags: tags
     end
