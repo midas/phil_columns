@@ -8,6 +8,7 @@ module PhilColumns
     autoload :Install,   'phil_columns/command/install'
     autoload :List,      'phil_columns/command/list'
     autoload :Mulligan,  'phil_columns/command/mulligan'
+    autoload :Reset,     'phil_columns/command/reset'
     autoload :Seed,      'phil_columns/command/seed'
 
   end

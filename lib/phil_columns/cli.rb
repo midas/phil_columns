@@ -117,6 +117,28 @@ module PhilColumns
       execute PhilColumns::Command::Mulligan, tags: tags
     end
 
+    desc "reset [TAGS]", "A reset of the data in the database"
+    long_desc <<-LONGDESC
+      A reset of the data in the database.  Empties the tables and then executes seeds.
+
+      #{default_tags_explanation}
+
+      #{env_option_description}
+
+      #{operation_option_description}
+
+      #{skip_on_empty_description}
+
+      #{version_option_description}
+    LONGDESC
+    env_option
+    operation_option
+    skip_option
+    version_option
+    def reset( *tags )
+      execute PhilColumns::Command::Reset, tags: tags
+    end
+
     desc "seed [TAGS]", "Execute the seeds"
     long_desc <<-LONGDESC
       Execute the seeds.
