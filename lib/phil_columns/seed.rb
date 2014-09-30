@@ -6,7 +6,7 @@ module PhilColumns
     end
 
     def self.envs( *envs )
-      _envs += envs.sort.map( &:to_s )
+      self._envs += envs.sort.map( &:to_s )
     end
 
     def self.tag( *tags )
@@ -14,15 +14,7 @@ module PhilColumns
     end
 
     def self.tags( *tags )
-      _tags += tags.sort.map( &:to_s )
-    end
-
-    def self._envs
-      @_envs || []
-    end
-
-    def self._tags
-      @_tags || []
+      self._tags += tags.sort.map( &:to_s )
     end
 
     def initialize( config )
@@ -39,6 +31,22 @@ module PhilColumns
 
     def protect( &block )
       block.call unless dry_run?
+    end
+
+    def self._envs
+      @_envs || []
+    end
+
+    def self._tags
+      @_tags || []
+    end
+
+    def self._envs=( val )
+      @_envs = val
+    end
+
+    def self._tags=( val )
+      @_tags = val
     end
 
   end
