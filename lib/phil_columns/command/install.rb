@@ -9,12 +9,14 @@ module PhilColumns
 
       def execute
         say "Installing phil columns", :cyan
-        write "Creating seeds directory: #{seeds_path} ... "
-        make_seeds_directory
-        say_ok
-        write "Writing config file: #{config_file_path} ... "
-        write_config_file
-        say_ok
+        confirm "Creating seeds directory: #{seeds_path} ... " do
+          make_seeds_directory
+        end
+
+        confirm "Writing config file: #{config_file_path} ... " do
+          write_config_file
+        end
+
         confirm "Writing env file: #{env_file_path} ... " do
           write_env_file
         end
