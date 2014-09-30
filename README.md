@@ -34,11 +34,11 @@ Or
 
 Installing phil_columns into a Ruby project.
 
-    $ phil_columns install some/path
+    $ phil-columns install some/path
 
 Installing phil_columns into a Rails project.
 
-    $ phil_columns install --rails
+    $ phil-columns install --rails
 
 The installation process puts in place the seeds directory and a configuration file: .phil_columns.  The --rails switch
 simply overrides some configurations to allow phil_columns to work in a Rails project.
@@ -48,7 +48,7 @@ simply overrides some configurations to allow phil_columns to work in a Rails pr
 
 Use the generator to create a seed.
 
-    $ phil_columns generate seed add_things
+    $ phil-columns generate seed add_things
 
 The generator puts a file in place.  Add your seeding logic to the #up and #down methods using any valid Ruby code.
 
@@ -68,53 +68,53 @@ The generator puts a file in place.  Add your seeding logic to the #up and #down
 
 Execute the seed(s).
 
-    $ phil_columns seed
+    $ phil-columns seed
 
 
 ### The Command Line Interface
 
 Get a summary of commands.
 
-    $ phil_columns help
+    $ phil-columns help
 
 Get help with a command.
 
-    $ phil_columns help COMMAND
-    $ phil_columns help seed
+    $ phil-columns help COMMAND
+    $ phil-columns help seed
 
 Some commands have sub-commands.  Get help witha sub-command.
 
-    $ phil_columns COMMAND help SUBCOMMAND
-    $ phil_columns generate help seed
+    $ phil-columns COMMAND help SUBCOMMAND
+    $ phil-columns generate help seed
 
 
 ### The Seed Command
 
 The simplest usage of the seed command defaults the environment to 'development' and the version to 'all.'
 
-    $ phil_columns seed
+    $ phil-columns seed
 
 The environment can be overridden using the command line.  The environment is used to select only seeds that have been specified for the
 specified environment.
 
-    $ phil_columns seed --env production
-    $ phil_columns seed -e production
+    $ phil-columns seed --env production
+    $ phil-columns seed -e production
 
 The version can be overridden using the command line.  When a version is specified the seeding occurs up to the specified version.  When
 the seeding direction is up the version specified is included in the seeding set.  When seeding direction is down the specified version is 
 not included in the seed set.
 
-    $ phil_columns seed --version 20140513111454
-    $ phil_columns seed -v 20140513111454
+    $ phil-columns seed --version 20140513111454
+    $ phil-columns seed -v 20140513111454
 
 The direction of the seeding can be altered to down using the down switch.
 
-    $ phil_columns seed --down
-    $ phil_columns seed -d
+    $ phil-columns seed --down
+    $ phil-columns seed -d
 
 Finally, a dry run can be invoked using the dry-run switch.
 
-    $ phil_columns seed --dry-run
+    $ phil-columns seed --dry-run
 
 
 ### The Mulligan Command
@@ -125,20 +125,20 @@ term is borrowed from golf where a mulligan is a do-over.
 
 The simplest usage of the mulligan command defaults the environment to 'development' and the version to 'all.'
 
-    $ phil_columns mulligan
+    $ phil-columns mulligan
 
 The environment can be overridden using the command line.  The environment is used to select only seeds that have been specified for the
 specified environment.
 
-    $ phil_columns mulligan --env production
-    $ phil_columns mulligan -e production
+    $ phil-columns mulligan --env production
+    $ phil-columns mulligan -e production
 
 The version can be overridden using the command line.  When a version is specified the seeding occurs up to the specified version.  When
 the seeding direction is up the version specified is included in the seeding set.  When seeding direction is down the specified version is 
 not included in the seed set.
 
-    $ phil_columns mulligan --version 20140513111454
-    $ phil_columns mulligan -v 20140513111454
+    $ phil-columns mulligan --version 20140513111454
+    $ phil-columns mulligan -v 20140513111454
 
 
 ### The Purge Command
@@ -148,17 +148,17 @@ is specified, those tables are also skipped unless the --skip option is applied 
 
 The simplest usage of the purge command.
 
-    $ phil_columns purge
+    $ phil-columns purge
 
 
 ### Additional Commands
 
 For documentation on additional commands/sub-commands use the command line interface's  built in help features.
 
-    $ phil_columns help
-    $ phil_columns help COMMAND
-    $ phil_columns COMMAND help
-    $ phil_columns COMMAND help SUBCOMMAND
+    $ phil-columns help
+    $ phil-columns help COMMAND
+    $ phil-columns COMMAND help
+    $ phil-columns COMMAND help SUBCOMMAND
 
 
 ### Tags and Environments
@@ -176,7 +176,7 @@ Specifying environment(s) for a seed is accomplished with the ::envs class metho
 
 To change the environment use the env switch.  When not specified the env defaults to development
 
-    $ phil_columns seed -e production
+    $ phil-columns seed -e production
 
 Similary, applying tag(s) is accomplished using the ::tags class method.
 
@@ -189,7 +189,7 @@ Similary, applying tag(s) is accomplished using the ::tags class method.
 To change the tag(s) provide them after the command command line.  When not specified the tag(s) default to those provided in the default_tags 
 configuration attribute.
 
-    $ phil_columns seed defaults settings etc
+    $ phil-columns seed defaults settings etc
 
 ### Dependencies
 
@@ -222,7 +222,7 @@ When the currently executing seed's dependencies are not satisfied an error is r
 Currently, filtering is applied with the any operation, which is the default.  In the future development the all operation will be added and negation
 of tags.  For example:
 
-    $ phil_columns seed defaults ~settings --all
+    $ phil-columns seed defaults ~settings --all
 
 
 
