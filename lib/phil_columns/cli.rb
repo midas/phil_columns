@@ -30,7 +30,8 @@ module PhilColumns
     end
 
     def self.skip_on_purge_description
-      %(When --skip, override the skip_tables_on_purge configuration.)
+      %(When --no-skip, override the skip_tables_on_purge configuration.  Otherwise, the tables specified in the skip_tables_on_purge configuration
+        will be skipped.)
     end
 
     def self.operation_option
