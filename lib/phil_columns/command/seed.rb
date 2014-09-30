@@ -10,14 +10,7 @@ module PhilColumns
         say( "- DRY RUN -", :yellow ) if config.dry_run
         say "Seeding #{method_name} to version #{config.version}", :green
 
-        seeds.each do |seed_meta|
-          say ''
-          say "* Executing seed: #{seed_meta.filepath}", :cyan
-
-          instance = seed_meta.klass.new( config )
-          instance.send( method_name )
-          record_seed( seed_meta )
-        end
+        seeder.execute
       end
 
     protected
