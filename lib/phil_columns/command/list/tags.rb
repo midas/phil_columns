@@ -25,8 +25,6 @@ module PhilColumns
 
       protected
 
-        attr_reader :tags
-
         def tags
           @tags ||= []
         end
