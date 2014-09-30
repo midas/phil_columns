@@ -49,7 +49,7 @@ module PhilColumns
           schema_load_strategy: 'load',
           schema_unload_strategy: 'drop',
           seeds_path: seeds_path.to_s,
-          skip_tables_on_empty: []
+          skip_tables_on_purge: []
         )
       end
 

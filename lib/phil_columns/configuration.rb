@@ -81,7 +81,7 @@ module PhilColumns
         schema_load_strategy
         schema_unload_strategy
         seeds_path
-        skip_tables_on_empty
+        skip_tables_on_purge
       )
     end
 

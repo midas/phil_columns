@@ -29,8 +29,8 @@ module PhilColumns
       option :skip, type: :boolean, desc: "When true, skip tables listed in config", default: true
     end
 
-    def self.skip_on_empty_description
-      %(When --skip, override the skip_tables_on_empty configuration.)
+    def self.skip_on_purge_description
+      %(When --skip, override the skip_tables_on_purge configuration.)
     end
 
     def self.operation_option
@@ -51,15 +51,15 @@ module PhilColumns
       version is not included in the set.)
     end
 
-    desc "empty", "Empty tables"
+    desc "purge", "Purge all data from tables"
     long_desc <<-LONGDESC
-      Empties all tables excluding any project metadata tables, ie. schema_migrations when using ActiveRecord.
+      Purges all tables excluding any project metadata tables, ie. schema_migrations when using ActiveRecord.
 
-      #{skip_on_empty_description}
+      #{skip_on_purge_description}
     LONGDESC
     skip_option
-    def empty( *tags )
-      execute PhilColumns::Command::Empty, tags: tags
+    def purge( *tags )
+      execute PhilColumns::Command::Purge, tags: tags
     end
 
     desc 'generate SUBCOMMAND', "Generates different phil_columns assets"
@@ -127,7 +127,7 @@ module PhilColumns
 
       #{operation_option_description}
 
-      #{skip_on_empty_description}
+      #{skip_on_purge_description}
 
       #{version_option_description}
     LONGDESC

@@ -1,6 +1,6 @@
 module PhilColumns
   module Command
-    class Empty < Base
+    class Purge < Base
 
       def execute
         load_environment

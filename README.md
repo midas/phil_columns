@@ -139,13 +139,14 @@ not included in the seed set.
     $ phil_columns mulligan -v 20140513111454
 
 
-### The Empty Command
+### The Purge Command
 
-The empty command empties all tables (excluding the schema_migrations table in a Rials project).
+The purge command purges the data from all tables (excluding the schema\_migrations table in a Rails project).  If skip_tables_on_purge configuration
+is specified, those tables are also skipped unless the --skip option is applied to the command.
 
-The simplest usage of the empty command.
+The simplest usage of the purge command.
 
-    $ phil_columns empty
+    $ phil_columns purge
 
 
 ### Additional Commands
