@@ -1,20 +1,8 @@
-require 'pathname'
-
 module PhilColumns
   module Command
-    class Reset < Base
+    module Reset
 
-      def execute
-        load_environment
-        purger.purge
-        seeder.execute
-      end
-
-    protected
-
-      def purger
-        @purger ||= PhilColumns::Purger.new( config )
-      end
+      autoload :Data, 'phil_columns/command/reset/data'
 
     end
   end
