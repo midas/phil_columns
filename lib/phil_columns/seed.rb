@@ -2,11 +2,12 @@ module PhilColumns
   class Seed
 
     def self.envs( *envs )
-      @_envs = envs.sort.map( &:to_s )
+      _envs += envs.sort.map( &:to_s )
+    end
     end
 
     def self.tags( *tags )
-      @_tags = tags.sort.map( &:to_s )
+      _tags += tags.sort.map( &:to_s )
     end
 
     def self._envs
