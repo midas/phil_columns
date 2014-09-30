@@ -71,6 +71,17 @@ module PhilColumns
         PhilColumns::Command::Reset::Data.new( options.merge( tags: tags )).execute
       end
 
+      desc "reset schema", "Reset the database schema"
+      long_desc <<-LONGDESC
+        Reset the database schema.  Drops the tables and loads the schema using migrations.
+
+        This operation is useful when the structure of the database has change and a load operation will not
+        pick up the changes.
+      LONGDESC
+      def schema( *tags )
+        PhilColumns::Command::Reset::Schema.new( options ).execute
+      end
+
       def self.handle_argument_error( command, error, _, __ )
         method = "handle_argument_error_for_#{command.name}"
 
