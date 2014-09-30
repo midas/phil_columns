@@ -20,6 +20,10 @@ module PhilColumns
       %(When --env[-e] option, override the environment.  Default: development.)
     end
 
+    def self.no_skip_option
+      option :skip, type: :boolean, desc: "When true, skip tables listed in config", default: true
+    end
+
     def self.operation_option
       option :operation, type: :string, aliases: '-o', desc: "The operation: all or any", default: 'any'
     end
@@ -42,6 +46,7 @@ module PhilColumns
     long_desc <<-LONGDESC
       Empties all tables excluding any project metadata tables, ie. schema_migrations when using ActiveRecord.
     LONGDESC
+    no_skip_option
     def empty( *tags )
       execute PhilColumns::Command::Empty, tags: tags
     end

@@ -5,8 +5,15 @@ module PhilColumns
       def execute
         load_environment
 
-        table_classes.each do |klass|
-          confirm "Deleting from #{klass.name.tableize} ... " do
+        tables.each do |table|
+          if config.skip &&
+              config.skip_tables_on_empty.include?( table )
+            say "Skipping #{table}", :yellow
+            next
+          end
+
+          confirm "Emptying #{table} ... " do
+            klass = table.classify.constantize
             klass.delete_all
           end
         end
@@ -16,10 +23,6 @@ module PhilColumns
       end
 
     protected
-
-      def table_classes
-        tables.map { |t| t.classify.constantize }
-      end
 
       def tables
         migrator.tables.sort
