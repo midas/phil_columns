@@ -6,8 +6,8 @@ module PhilColumns
     autoload :Generate,  'phil_columns/command/generate'
     autoload :Generator, 'phil_columns/command/generator'
     autoload :Install,   'phil_columns/command/install'
-    autoload :Mulligan,  'phil_columns/command/mulligan'
     autoload :List,      'phil_columns/command/list'
+    autoload :Mulligan,  'phil_columns/command/mulligan'
     autoload :Seed,      'phil_columns/command/seed'
 
   end
