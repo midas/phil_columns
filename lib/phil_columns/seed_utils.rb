@@ -22,7 +22,7 @@ module PhilColumns
     end
 
     def seed_filepaths
-      seeds = Dir.glob( "#{seeds_path}/*" )
+      seeds = Dir.glob( "#{seeds_path}/**/*.rb" )
       if config.down
         seeds.sort { |a,b| b <=> a }
       else
