@@ -244,16 +244,19 @@ To specify a seed for production, simply add production to the specified environ
 
 ### The Configuration File
 
-The configuration file is in YAML format.
+The configuration file is in YAML format.  The following configuraiton file is the default configuration for a Rails project.
 
     ---
     default_tags:
     - default
     env_files:
     - config/environment
+    - config/phil_columns
     schema_load_strategy: load
     schema_unload_strategy: drop
     seeds_path: db/seeds
+    skip_tables_on_purge:
+    - ncite_fake_vetting_responses
 
 #### Configuration Attributes
 
@@ -278,6 +281,10 @@ the environment file(s) from a framework, such as Rails.
 ##### seeds_path
 
 [String] The relative path to the seeds directory.
+
+##### skip_tables_on_purge
+
+[String] A list of tables to skip when purging.
 
 
 ## Adapters and Extensions
