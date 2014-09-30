@@ -9,16 +9,25 @@ module PhilColumns
 
       def execute
         say "Installing phil columns", :cyan
+
         confirm "Creating seeds directory: #{seeds_path} ... " do
           make_seeds_directory
         end
 
-        confirm "Writing config file: #{config_file_path} ... " do
+        begin
+          write "Writing config file: #{config_file_path} ... "
           write_config_file
+          say_ok
+        rescue PhilColumns::Error
+          say_skipping
         end
 
-        confirm "Writing env file: #{env_file_path} ... " do
+        begin
+          write "Writing env file: #{env_file_path} ... "
           write_env_file
+          say_ok
+        rescue PhilColumns::Error
+          say_skipping
         end
       end
 
@@ -29,13 +38,24 @@ module PhilColumns
       end
 
       def write_config_file
-        config.save_to_file
+        if file_collision( config.config_filepath )
+          config.save_to_file
+          return
+        end
+
+        raise PhilColumns::Error, "Config file #{config.config_filepath} already exists"
       end
 
       def write_env_file
-        File.open env_file_path.expand_path, 'w' do |f|
-          f.puts( '# Add any Phil Columns only configuration in this file' )
+        if file_collision( env_file_path.expand_path )
+          File.open env_file_path.expand_path, 'w' do |f|
+            f.puts( '# Add any Phil Columns only configuration in this file' )
+          end
+
+          return
         end
+
+        raise PhilColumns::Error, "Config file #{env_file_path.expand_path} already exists"
       end
 
       def config

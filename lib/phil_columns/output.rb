@@ -1,6 +1,10 @@
 module PhilColumns
   module Output
 
+    def self.included( base )
+      base.send( :include, Thor::Shell )
+    end
+
     def write( msg, color=:white )
       $stdout.write( Rainbow( msg ).color( color ))
     end
@@ -15,6 +19,10 @@ module PhilColumns
 
     def say_error
       say 'ERROR', :red
+    end
+
+    def say_skipping
+      say 'SKIPPING', :yellow
     end
 
     def confirm( msg, color=:white, &block )

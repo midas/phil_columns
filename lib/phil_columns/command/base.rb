@@ -2,7 +2,6 @@ module PhilColumns
   module Command
     class Base
 
-      include Thor::Actions
       include PhilColumns::Output
 
       def initialize( options )
