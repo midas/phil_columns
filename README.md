@@ -1,3 +1,5 @@
+![PhilColumns: No Fixtures Required](https://raw.githubusercontent.com/midas/phil_columns/master/readme/PhilColumns.png)
+
 # PhilColumns
 
 A utility for seeding databases for development and production (works in Rails and non-Rails Ruby projects).
