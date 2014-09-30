@@ -8,6 +8,11 @@ module PhilColumns
 
     include Thor::Actions
 
+    def self.default_tags_explanation
+      %(If default_tags are specified in the config file and no tags are provided as parameters to the command, the default tags are applied
+        as the tags.  However, if tags are provided as parameters they override the defult tags.)
+    end
+
     def self.dry_run_option
       option :dry_run, type: :boolean, desc: "When true, output steps but does not execute protected blocks"
     end
@@ -81,6 +86,8 @@ module PhilColumns
       unload and load the schema is controlled by the configuration file attributes schema_unload\_strategy and schema\_load_strategy.  The mulligan
       term is borrowed from golf where a mulligan is a do-over.
 
+      #{default_tags_explanation}
+
       #{env_option_description}
 
       #{operation_option_description}
@@ -107,6 +114,8 @@ module PhilColumns
     desc "seed [TAGS]", "Execute the seeds"
     long_desc <<-LONGDESC
       Execute the seeds.
+
+      #{default_tags_explanation}
 
       When --down[-d] option, execute the down seeds.
 
