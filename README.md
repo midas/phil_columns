@@ -284,3 +284,8 @@ the environment file(s) from a framework, such as Rails.
 
 * [phil_columns-activerecord](https://github.com/midas/phil_columns-activerecord)
 * [phil_columns-factory_girl](https://github.com/midas/phil_columns-factory_girl)
+
+
+## Contributors
+
+* Nils Jonsson [njonsson](https://github.com/njonsson)
