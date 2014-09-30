@@ -1,6 +1,10 @@
 module PhilColumns
   class Seed
 
+    def self.depends_on( *depends_on )
+      self._depends_on += depends_on.sort.map( &:to_s )
+    end
+
     def self.env( *envs )
       self.envs( *envs )
     end
@@ -41,12 +45,20 @@ module PhilColumns
       @_tags || []
     end
 
+    def self._depends_on
+      @_depends_on || []
+    end
+
     def self._envs=( val )
       @_envs = val
     end
 
     def self._tags=( val )
       @_tags = val
+    end
+
+    def self._depends_on=( val )
+      @_depends_on = val
     end
 
   end

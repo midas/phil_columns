@@ -16,6 +16,7 @@ module PhilColumns
         Hashie::Mash.new( envs: klass._envs,
                           filepath: seed_filepath,
                           klass: klass,
+                          name: File.basename( seed_filepath, '.rb' ),
                           tags: klass._tags,
                           timestamp: discover_seed_timestamp( seed_filepath ))
       end
@@ -53,6 +54,14 @@ module PhilColumns
       matches = SEED_REGEX.match( filepath )
       snakecased = matches[2]
       snakecased.camelize.constantize
+    end
+
+    def seed_already_executed?( version )
+      archivist.seed_already_executed?( version )
+    end
+
+    def archivist
+      @archivist ||= PhilColumns::Archivist.new
     end
 
   end

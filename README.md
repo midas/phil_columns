@@ -191,6 +191,32 @@ configuration attribute.
 
     $ phil_columns seed defaults settings etc
 
+### Dependencies
+
+A seeds dependence on one more more other seeds to execute before it can be specified.  To do so you must pass the version string(s) to the ::depends_on 
+method.
+
+    class AddThings < PhilColumns::Seed
+      envs :development
+
+      depends_on 20140523170555
+      ...
+    end
+
+The version string(s) can be cpecified as Fixnum, String or Symbol.  For instance.
+
+    class AddThings < PhilColumns::Seed
+      envs :development
+
+      depends_on 20140523170555
+      depends_on '20120528182320' 
+      depends_on %w(20120705124536 20120717203851)
+      ...
+    end
+
+When the currently executing seed's dependencies are not satisfied an error is raised and seeding is abandoned, outputting a helpful message to the console.
+
+
 #### Advanced Filtering
 
 Currently, filtering is applied with the any operation, which is the default.  In the future development the all operation will be added and negation

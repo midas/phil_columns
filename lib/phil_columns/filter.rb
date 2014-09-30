@@ -50,14 +50,6 @@ module PhilColumns
       end
     end
 
-    def seed_already_executed?( version )
-      archivist.seed_already_executed?( version )
-    end
-
-    def archivist
-      @archivist ||= PhilColumns::Archivist.new
-    end
-
     def any_exclusion_tags?
       config.exclusion_tags.size > 0
     end
