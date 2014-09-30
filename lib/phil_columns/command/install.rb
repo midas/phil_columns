@@ -15,6 +15,9 @@ module PhilColumns
         write "Writing config file: #{config_file_path} ... "
         write_config_file
         say_ok
+        confirm "Writing env file: #{env_file_path} ... " do
+          write_env_file
+        end
       end
 
     protected
@@ -25,6 +28,12 @@ module PhilColumns
 
       def write_config_file
         config.save_to_file
+      end
+
+      def write_env_file
+        File.open env_file_path.expand_path, 'w' do |f|
+          f.puts( '# Add any Phil Columns only configuration in this file' )
+        end
       end
 
       def config
@@ -49,14 +58,19 @@ module PhilColumns
         Pathname.new( rel )
       end
 
+      def env_file_path
+        Pathname.new( 'config/phil_columns.rb' )
+      end
+
       def rails?
         options[:rails]
       end
 
       def rails_default_settings
         {
-          'env_files' => [
-            'config/environment'
+          env_files: [
+            'config/environment',
+            'config/phil_columns'
           ]
         }
       end

@@ -48,9 +48,8 @@ module PhilColumns
       def load_environment
         return if env_files.nil? || env_files.empty?
 
-        say 'Loading environment ...'
-
         env_files.each do |file|
+          say "Loading environment: #{file} ..."
           require file.expand_path
         end
       end
