@@ -328,6 +328,12 @@ the common code into one or more files.
     ...
 
 
+### The Console
+
+Phil columns has a built in console that loads up the seeding environment and any helpers defined in the Seeds module.
+
+    $ phil-columns console
+
 
 ## Adapters and Extensions
 
