@@ -53,6 +53,15 @@ module PhilColumns
       version is not included in the set.)
     end
 
+    desc "console", "Load a console with seeding assets available"
+    long_desc <<-LONGDESC
+      #{env_option_description}
+    LONGDESC
+    env_option
+    def console
+      execute PhilColumns::Command::Console
+    end
+
     desc "purge", "Purge all data from tables"
     long_desc <<-LONGDESC
       Purges all tables excluding any project metadata tables, ie. schema_migrations when using ActiveRecord.
