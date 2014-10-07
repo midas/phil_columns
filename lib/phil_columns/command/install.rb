@@ -49,7 +49,7 @@ module PhilColumns
       def write_env_file
         if file_collision( env_file_path.expand_path )
           File.open env_file_path.expand_path, 'w' do |f|
-            f.puts( '# Add any Phil Columns only configuration in this file' )
+            f.puts( "# Add any Phil Columns only configuration in this file\n\nActiveRecord::Base::connection # need this for console command (not sure why?)\n" )
           end
 
           return
