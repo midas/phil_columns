@@ -287,6 +287,48 @@ the environment file(s) from a framework, such as Rails.
 [String] A list of tables to skip when purging.
 
 
+### DRYing Seeds Up
+
+#### Rails Project
+
+As your seed set grows you will certainly have opportunities to DRY up your seeds with utility methods, etc.  The best way to accomplish this is to add
+code to the config/phil_columns.rb (Rails specific).  One possibility is to define modules to use as mix-ins to the seeds.
+
+    # Add any Phil Columns only configuration in this file
+
+    Rails.logger.level = Logger::WARN #minimize log output during seeding
+
+    module ThingHelper
+      def create_thing( name )
+        Thing.create! name: name
+      end
+    end
+
+To use the code in a seed simply include the module.
+
+    class AddThings < PhilColumns::Seed
+      include ThingHelper
+
+      def up
+        create_thing( 'toy' )
+      end
+    end
+
+#### Plain-Old Ruby Project
+
+The same concepts applied above to a Rails project apply to a Ruby project.  The only difference is specifying an environment file in the configuration 
+file: .phil\_columns.  The env_files attribute takes an array of files to load.  Simply provide a relative path to the file from the project root and place
+the common code into one or more files.
+
+    ---
+    ...
+    env_files:
+    - some/environment/file
+    - another/environment/file
+    ...
+
+
+
 ## Adapters and Extensions
 
 * [phil_columns-activerecord](https://github.com/midas/phil_columns-activerecord)
