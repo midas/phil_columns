@@ -2,7 +2,6 @@ require 'active_support/core_ext/string'
 require 'phil_columns/version'
 require 'phil_columns/railtie' if defined? Rails
 require 'rainbow'
-require 'pry-debugger'
 
 module PhilColumns
 
